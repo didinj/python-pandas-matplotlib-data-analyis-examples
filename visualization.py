@@ -1,0 +1,36 @@
+import matplotlib.pyplot as plt
+
+# Revenue over time
+revenue_per_date = df.groupby('Date')['Revenue'].sum().reset_index()
+plt.figure(figsize=(8,5))
+plt.plot(revenue_per_date['Date'], revenue_per_date['Revenue'], marker='o')
+plt.title('Revenue Over Time')
+plt.xlabel('Date')
+plt.ylabel('Revenue')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Revenue by region (bar chart)
+revenue_by_region = df.groupby('Region')['Revenue'].sum().reset_index()
+plt.figure(figsize=(6,4))
+plt.bar(revenue_by_region['Region'], revenue_by_region['Revenue'], color='skyblue')
+plt.title('Total Revenue by Region')
+plt.xlabel('Region')
+plt.ylabel('Revenue')
+plt.show()
+
+# Revenue share by product (pie chart)
+revenue_by_product = df.groupby('Product')['Revenue'].sum()
+plt.figure(figsize=(6,6))
+plt.pie(revenue_by_product, labels=revenue_by_product.index, autopct='%1.1f%%', startangle=140)
+plt.title('Revenue Share by Product')
+plt.show()
+
+# Distribution of units sold (histogram)
+plt.figure(figsize=(6,4))
+plt.hist(df['Units'], bins=10, color='orange', edgecolor='black')
+plt.title('Distribution of Units Sold')
+plt.xlabel('Units')
+plt.ylabel('Frequency')
+plt.show()
